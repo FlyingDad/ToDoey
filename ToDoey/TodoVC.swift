@@ -10,7 +10,7 @@ import UIKit
 
 class TodoVC: UITableViewController {
     
-    let itemArray = ["Find Mike", "Buy Eggos", "Get a gun"]
+    var itemArray = ["Find Mike", "Buy Eggos", "Get a gun"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,5 +94,28 @@ class TodoVC: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    //MARK - Add new items
+    
+    @IBAction func addBtnPressed(_ sender: Any) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add New Item", message: nil, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            // What happens when add item clicked on alert
+            if textField.text != "" {
+                self.itemArray.append(textField.text!)
+                self.tableView.reloadData()
+            }
+        }
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create new item"
+            textField = alertTextField
+        }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
 }
